@@ -8,61 +8,9 @@
 
 Вопрос 1.3
 Выполните код проекта. Найдите в state-файле секретное содержимое созданного ресурса random_password, пришлите в качестве ответа конкретный ключ и его значение.
-
-Ответ 1.3
-{
-  "version": 4,
-  "terraform_version": "1.14.5",
-  "serial": 1,
-  "lineage": "53642c3e-2d47-0dd3-b8a6-3f4a6ebbef68",
-  "outputs": {},
-  "resources": [
-    {
-      "mode": "managed",
-      "type": "random_password",
-      "name": "random_string",
-      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
-      "instances": [
-        {
-          "schema_version": 3,
-          "attributes": {
-            "bcrypt_hash": "$2a$10$9165vjRZV7T8pgC7EQMPsO/vdL6VL.ZpJ/z4tbhr7x2PbAGXifsXy",
-            "id": "none",
-            "keepers": null,
-            "length": 16,
-            "lower": true,
-            "min_lower": 1,
-            "min_numeric": 1,
-            "min_special": 0,
-            "min_upper": 1,
-            "number": true,
-            "numeric": true,
-            "override_special": null,
-            "result": "8rCdwKPrO55j3MvH",
-            "special": false,
-            "upper": true
-          },
-          "sensitive_attributes": [
-            [
-              {
-                "type": "get_attr",
-                "value": "bcrypt_hash"
-              }
-            ],
-            [
-              {
-                "type": "get_attr",
-                "value": "result"
-              }
-            ]
-          ],
-          "identity_schema_version": 0
-        }
-      ]
-    }
-  ],
-  "check_results": null
-}
+ 
+Ответ 1.3  "result": "8rCdwKPrO55j3MvH" 
+       
 
 Вопрос 1.4
 Раскомментируйте блок кода, примерно расположенный на строчках 29–42 файла main.tf. Выполните команду terraform validate. Объясните, в чём заключаются намеренно допущенные ошибки. Исправьте их.
@@ -228,3 +176,4 @@ keep_locally = true
 https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/image
 
 keep_locally (Boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation.
+
