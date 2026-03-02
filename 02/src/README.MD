@@ -53,10 +53,10 @@ resource "yandex_compute_instance" "platform" {
 }
 
 
-```bash 
+```
 
-    ![alt text](../images/ssh_ifconfig_me.png)
-    ![alt text](../images/web_ip.png)
+![alt text](../images/ssh_ifconfig_me.png)
+![alt text](../images/web_ip.png)
    
 
 Ответ 6
