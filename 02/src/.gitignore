@@ -1,0 +1,19 @@
+# --- Секреты (НЕ КОММИТЬ!) ---
+secrets.auto.tfvars
+*.auto.tfvars
+
+# --- Terraform ---
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# --- Ключи ---
+config/ssh_key.pub
+*.pem
+*.key
+
+# --- Локальное ---
+*.tfvars.local
+.idea/
+.vscode/config/authorized_key.json
