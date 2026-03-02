@@ -1,19 +1,37 @@
-# --- Секреты (НЕ КОММИТЬ!) ---
-secrets.auto.tfvars
-*.auto.tfvars
+# =============================================================================
+# СЕКРЕТЫ И КЛЮЧИ (НИКОГДА НЕ КОММИТЬ!)
+# =============================================================================
 
-# --- Terraform ---
+# Yandex Cloud авторизованный ключ
+**/authorized_key.json
+**/config/authorized_key.json
+02/src/config/authorized_key.json
+
+# Terraform секреты
+**/secrets.auto.tfvars
+**/*.auto.tfvars
+**/terraform.tfvars
+
+# SSH ключи
+**/ssh_key.pub
+**/config/ssh_key.pub
+**/*.pem
+**/*.key
+
+# =============================================================================
+# TERRAFORM
+# =============================================================================
 .terraform/
 *.tfstate
 *.tfstate.backup
 .terraform.lock.hcl
 
-# --- Ключи ---
-config/ssh_key.pub
-*.pem
-*.key
-
-# --- Локальное ---
-*.tfvars.local
+# =============================================================================
+# IDE И ЛОКАЛЬНЫЕ ФАЙЛЫ
+# =============================================================================
 .idea/
-.vscode/config/authorized_key.json
+.vscode/
+*.swp
+*.swo
+*.log
+.DS_Store
