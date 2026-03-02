@@ -62,7 +62,7 @@ resource "yandex_compute_instance" "platform" {
 Ответ 6
 ```bash 
 resources {
-  cores         = 1
+  cores         = 2
   memory        = 1
   core_fraction = 5      # ← минимальная гарантия CPU
 }
