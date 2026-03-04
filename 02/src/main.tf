@@ -14,9 +14,9 @@ resource "yandex_vpc_subnet" "develop_web" {
 
 resource "yandex_vpc_subnet" "develop_db" {
   name           = "${var.vpc_name}-db"
-  zone           = "ru-central1-b"  # ← ДРУГАЯ ЗОНА!
-  network_id     = yandex_vpc_network.develop.id  # ← ТА ЖЕ сеть!
-  v4_cidr_blocks = ["10.0.2.0/24"]  # ← Другой CIDR
+  zone           = "ru-central1-b" 
+  network_id     = yandex_vpc_network.develop.id 
+  v4_cidr_blocks = ["10.0.2.0/24"]
 }
 
 

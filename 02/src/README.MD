@@ -99,5 +99,46 @@ vms_info = {
     "zone" = "ru-central1-a"
   }
 }
-  ---
-   
+
+```
+
+
+
+
+
+ДОРАБОТКА 
+в файд locals.tf переделан блок
+
+```bash
+locals {
+
+  vm_web_name = "${var.vpc_name}-${var.vm_web_zone}-web" 
+  vm_db_name  = "${var.vpc_name}-${var.vm_db_zone}-db"
+
+  ssh_public_key = file("${path.module}/config/ssh_key.pub")
+ 
+  vm_metadata = {
+    serial-port-enable = "1"
+    ssh-keys           = "ubuntu:${local.ssh_public_key}"
+  }
+}
+```
+
+в фаил main.tf
+
+```bash
+resource "yandex_vpc_subnet" "develop_web" {
+  name           = "${var.vpc_name}-web"
+  zone           = "ru-central1-a"
+  network_id     = yandex_vpc_network.develop.id
+  v4_cidr_blocks = ["10.0.1.0/24"]
+}
+
+
+resource "yandex_vpc_subnet" "develop_db" {
+  name           = "${var.vpc_name}-db"
+  zone           = "ru-central1-b" 
+  network_id     = yandex_vpc_network.develop.id 
+  v4_cidr_blocks = ["10.0.2.0/24"]
+}
+```
