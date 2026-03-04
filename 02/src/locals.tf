@@ -1,7 +1,7 @@
 locals {
 
-  vm_web_name = "netology-develop-platform-web"
-  vm_db_name  = "netology-develop-platform-db"
+  vm_web_name = "${var.vpc_name}-${var.vm_web_zone}-web" 
+  vm_db_name  = "${var.vpc_name}-${var.vm_db_zone}-db"
 
   ssh_public_key = file("${path.module}/config/ssh_key.pub")
  

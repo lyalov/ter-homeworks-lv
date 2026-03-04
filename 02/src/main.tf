@@ -3,18 +3,29 @@ resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
 
-resource "yandex_vpc_subnet" "develop" {
-  name           = var.vpc_name
+
+resource "yandex_vpc_subnet" "develop_web" {
+  name           = "${var.vpc_name}-web"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = ["10.0.1.0/24"]
 }
 
+
+resource "yandex_vpc_subnet" "develop_db" {
+  name           = "${var.vpc_name}-db"
+  zone           = "ru-central1-b"  # ← ДРУГАЯ ЗОНА!
+  network_id     = yandex_vpc_network.develop.id  # ← ТА ЖЕ сеть!
+  v4_cidr_blocks = ["10.0.2.0/24"]  # ← Другой CIDR
+}
+
+
 data "yandex_compute_image" "ubuntu" {
   family = var.vm_web_image_family
 }
 
-#### VM Web  ###
+
+# VM Web
 
 resource "yandex_compute_instance" "platform_web" {
   name        = local.vm_web_name
@@ -39,19 +50,20 @@ resource "yandex_compute_instance" "platform_web" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.develop.id  # ← ОДНА подсеть для обеих!
+    subnet_id = yandex_vpc_subnet.develop_web.id  # ← Подсеть Web
     nat       = var.vm_web_nat
   }
 
   metadata = local.vm_metadata
 }
 
-#### VM DB ####
+
+# VM DB
 
 resource "yandex_compute_instance" "platform_db" {
   name        = local.vm_db_name
   platform_id = var.vm_db_platform_id
-  zone        = "ru-central1-a"
+  zone        = "ru-central1-b"  # ← ДРУГАЯ ЗОНА!
 
   resources {
     cores         = var.vms_resources["db"].cores
@@ -71,7 +83,7 @@ resource "yandex_compute_instance" "platform_db" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.develop.id  # ← ТА ЖЕ подсеть!
+    subnet_id = yandex_vpc_subnet.develop_db.id  # ← Подсеть DB (ДРУГАЯ!)
     nat       = var.vm_db_nat
   }
 
